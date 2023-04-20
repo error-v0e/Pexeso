@@ -8,7 +8,7 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body id="body">
+<body>
     <form id="size" name="size" onsubmit="return Size();">
         <label for="height">height</label>
         <input type="number" name="height" min="3" max="10" placeholder="3-10">
