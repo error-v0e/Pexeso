@@ -7,6 +7,7 @@
     <title>Pexeso</title>
     
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/abc1fc3e2f.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <form id="size" name="size" onsubmit="return Size();">
