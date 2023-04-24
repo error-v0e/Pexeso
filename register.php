@@ -7,8 +7,41 @@
     <title>Register</title>
     <link rel="stylesheet" href="registerStyle.css">
     <script src="https://kit.fontawesome.com/abc1fc3e2f.js" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+    crossorigin="anonymous">
+    </script>
 </head>
 <body class="background">
+
+    <?php
+    $connection = new mysqli("localhost", "root", "", "2itc");
+    if($connection->errno === TRUE){
+        echo $connection->error;
+        die();
+    }
+
+    $username = $_POST['jmeno'];
+    $email = $_POST['e-mail'];
+    $password = $_POST['heslo'];
+    $confPassword = $_POST['potvrdHeslo'];
+
+    if($confPassword == $password){
+        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+        if (mysqli_query($conn, $sql)) {
+        echo "New record created successfully";
+        } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    }
+    else{
+        echo "password isnt same as confirm password";
+    }
+
+    ?>
+
+<form action="register.php" method="POST"></form>
 <div class="white-square">
         <div class="h1">
             Register
@@ -19,6 +52,13 @@
         <div class="jmeno">
             <label for="jmeno"></label>
             <input type="text" id="jmeno" name="jmeno" placeholder="Enter your username">
+        </div>
+        <div class="email">
+            E-mail
+        </div>
+        <div class="e-mail">
+            <label for="jmeno"></label>
+            <input type="text" id="e-mail" name="e-mail" placeholder="Enter your e-mail">
         </div>
         <div class="password">
             Password
