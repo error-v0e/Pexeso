@@ -1,57 +1,57 @@
 var tags = [];
 
-// vyuzil jsem na to fontawesome.com ale mohou tam byt fotky to je na vas treba api
+// vyuzil jsem na to barvy ale mohou tam byt fotky to je na vas treba api
 var pexesoVypln = [
-    '<i class="fa-solid fa-fire"></i>',
-    '<i class="fa-solid fa-tree"></i>',
-    '<i class="fa-solid fa-compass"></i>',
-    '<i class="fa-solid fa-binoculars"></i>',
-    '<i class="fa-solid fa-mountain-sun"></i>',
-    '<i class="fa-solid fa-route"></i>',
-    '<i class="fa-solid fa-signs-post"></i>',
-    '<i class="fa-solid fa-person-hiking"></i>',
-    '<i class="fa-solid fa-mosquito"></i>',
-    '<i class="fa-solid fa-map-location-dot"></i>',
-    '<i class="fa-solid fa-kit-medical"></i>',
-    '<i class="fa-solid fa-frog"></i>',
-    '<i class="fa-solid fa-caravan"></i>',
-    '<i class="fa-solid fa-campground"></i>',
-    '<i class="fa-solid fa-bucket"></i>',
-    '<i class="fa-solid fa-bottle-water"></i>',
-    '<i class="fa-solid fa-hippo"></i>',
-    '<i class="fa-solid fa-feather"></i>',
-    '<i class="fa-solid fa-fish"></i>',
-    '<i class="fa-solid fa-dragon"></i>',
-    '<i class="fa-solid fa-otter"></i>',
-    '<i class="fa-solid fa-shrimp"></i>',
-    '<i class="fa-solid fa-paw"></i>',
-    '<i class="fa-solid fa-locust"></i>',
-    '<i class="fa-solid fa-horse"></i>',
-    '<i class="fa-solid fa-dog"></i>',
-    '<i class="fa-solid fa-cat"></i>',
-    '<i class="fa-solid fa-bath"></i>',
-    '<i class="fa-solid fa-gamepad"></i>',
-    '<i class="fa-solid fa-school"></i>',
-    '<i class="fa-solid fa-robot"></i>',
-    '<i class="fa-solid fa-child"></i>',
-    '<i class="fa-solid fa-puzzle-piece"></i>',
-    '<i class="fa-solid fa-cookie-bite"></i>',
-    '<i class="fa-solid fa-snowman"></i>',
-    '<i class="fa-solid fa-shapes"></i>',
-    '<i class="fa-solid fa-person-biking"></i>',
-    '<i class="fa-solid fa-mitten"></i>',
-    '<i class="fa-solid fa-ice-cream"></i>',
-    '<i class="fa-solid fa-cubes-stacked"></i>',
-    '<i class="fa-solid fa-cake-candles"></i>',
-    '<i class="fa-solid fa-baseball-bat-ball"></i>',
-    '<i class="fa-solid fa-apple-whole"></i>',
-    '<i class="fa-solid fa-paint-roller"></i>',
-    '<i class="fa-solid fa-brush"></i>',
-    '<i class="fa-solid fa-pencil"></i>',
-    '<i class="fa-solid fa-wrench"></i>',
-    '<i class="fa-solid fa-hammer"></i>',
-    '<i class="fa-solid fa-toolbox"></i>',
-    '<i class="fa-solid fa-poo"></i>',
+    '#639300',
+    '#ff7100',
+    '#ffcc26',
+    '#da0000',
+    '#ff795b',
+    '#a1ff46',
+    '#00ffc6',
+    '#6fd6ff',
+    '#008bde',
+    '#0059a8',
+    '#243fcd',
+    '#badfff',
+    '#0000f0',
+    '#8a6bff',
+    '#a76bff',
+    '#d100ff',
+    '#ff00fc',
+    '#9a0061',
+    '#481a1d',
+    '#864840',
+    '#3c2016',
+    '#352c04',
+    '#908259',
+    '#445927',
+    '#27594d',
+    '#275459',
+    '#152e41',
+    '#273159',
+    '#2d2759',
+    '#473260',
+    '#593b59',
+    '#63494a',
+    '#1d1b0f',
+    '#120f1e',
+    '#0e1900',
+    '#474a45',
+    '#25342d',
+    '#353f46',
+    '#414141',
+    '#737373',
+    '#ff7200',
+    '#460004',
+    '#460020',
+    '#270046',
+    '#a85791',
+    '#b56c5b',
+    '#e6b667',
+    '#4e584b',
+    '#584b54',
+    '#0c1519',
 ]
 
 function Size(){
@@ -108,33 +108,44 @@ function RandomTag(){
     
 }
 
-var prvniBool;
+var otoceniVPrubehu = false;
+var prvniBool = false;
 var tag1;
 var karta1;
 
 function Otoc(componet){
-    const tagValue = componet.getAttribute('tag');
-    componet.innerHTML = pexesoVypln[tagValue]
+    if (otoceniVPrubehu == false) {
+        const tagValue = componet.getAttribute('tag');
+        componet.style.backgroundColor = pexesoVypln[tagValue]
 
-    if (prvniBool)
-    {
-        if (intValue == tag1)
-        {
-            prvni = false;
-            componet.style.visibility = 'hidden';
-            karta1.style.visibility = 'hidden';
+        if (prvniBool==true){
+            otoceniVPrubehu = true;
         }
-        else
-        {
-            componet.innerHTML = ' ';
-            karta1.innerHTML = ' ';
-            prvni = false;
-        }
+        setTimeout(function() {
+            if (prvniBool == true)
+            {
+                otoceniVPrubehu = true;
+                if (tagValue == tag1)
+                {
+                    componet.style.visibility = 'hidden';
+                    karta1.style.visibility = 'hidden';
+                    prvniBool = false;
+                }
+                else
+                {
+                    componet.style.backgroundColor = 'black';
+                    karta1.style.backgroundColor = 'black';
+                    prvniBool = false;
+                }
+            }
+            else
+            {
+                tag1 = tagValue;
+                prvniBool = true;
+                karta1= componet;
+            }
+            otoceniVPrubehu = false;
+        }, 1500);
     }
-    else
-    {
-        tag1 = tagValue;
-        prvni = true;
-        karta1= componet;
-    }
+    
 }
