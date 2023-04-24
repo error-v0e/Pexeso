@@ -114,7 +114,7 @@ var otoceniVPrubehu = false;
 var prvniBool = false;
 var tag1;
 var karta1;
-// chyba muzes kliknout dvakrat na stejnou karticku a ono to uzna !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 function Otoc(componet){
     if (otoceniVPrubehu == false && id1 != componet.id) {
         const tagValue = componet.getAttribute('tag');
