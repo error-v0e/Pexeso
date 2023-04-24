@@ -15,6 +15,21 @@
 </head>
 <body class="background">
 
+<script>
+    /*function validate(){
+        var jmeno = document.getElementById('jmeno').value;
+        var email = document.getElementById('e-mail').value;
+        var heslo = document.getElementById('heslo').value;
+        var confHeslo = document.getElementById('povrdHeslo').value;
+
+        if (jmeno.length > 0 && email.length > 0 && heslo.length > 0 && confHeslo.length > 0 && heslo == confHeslo){
+            alert("went through");
+            return true;
+        }
+        alert("did not go through");
+        return false;
+    }*/
+
     <?php
     $connection = new mysqli("localhost", "root", "", "2itc");
     if($connection->errno === TRUE){
@@ -27,19 +42,20 @@
     $password = $_POST['heslo'];
     $confPassword = $_POST['potvrdHeslo'];
 
-    if($confPassword == $password || $password == "" || $confPassword == ""){
-        $sql = "INSERT INTO users (jmeno, email, heslo) VALUES ('$username', '$email', '$password')";
-        if (mysqli_query($connection, $sql)) {
-        echo "New record created successfully";
-        } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
+    if (empty($username) || empty($email) || empty($password) || empty($confPassword)) {
+        echo "nemas vsechno zadane";
     }
-    else{
-        echo "password isnt same as confirm password";
+    else if ($password != $confPassword) {
+        echo "hesla se neshoduji";
+    }
+    else {
+        $sql = "INSERT INTO users (jmeno, email, heslo) VALUES ('$username', '$email', '$password')";
+        mysqli_query($connection, $sql);
     }
 
     ?>
+
+</script>
 
 <form action="register.php" method="post">
 <div class="white-square">
