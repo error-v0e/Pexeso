@@ -27,9 +27,9 @@
     $password = $_POST['heslo'];
     $confPassword = $_POST['potvrdHeslo'];
 
-    if($confPassword == $password){
-        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
-        if (mysqli_query($conn, $sql)) {
+    if($confPassword == $password || $password == "" || $confPassword == ""){
+        $sql = "INSERT INTO users (jmeno, email, heslo) VALUES ('$username', '$email', '$password')";
+        if (mysqli_query($connection, $sql)) {
         echo "New record created successfully";
         } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -41,7 +41,7 @@
 
     ?>
 
-<form action="register.php" method="POST"></form>
+<form action="register.php" method="post">
 <div class="white-square">
         <div class="h1">
             Register
@@ -81,5 +81,6 @@
             <a href="http://localhost/workspace/Pexeso/login.php">Login</a>
         </div>
     </div>
+    </form>
 </body>
 </html>
