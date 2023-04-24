@@ -22,6 +22,7 @@
         <input type="number" name="width" min="3" max="10" placeholder="3-10">
         <input type="submit" value="Start">
     </form>
+    <div id="score">Score: 0</div>
     <table id="table"></table>
 
 

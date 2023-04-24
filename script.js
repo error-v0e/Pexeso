@@ -83,7 +83,7 @@ function Size(){
 
             }
             else {
-                tr.innerHTML+= `<td onclick="Otoc(this)" tag="${RandomTag()}">`
+                tr.innerHTML+= `<td onclick="Otoc(this)" id="${i}${j}" tag="${RandomTag()}">`
             }
             
 
@@ -107,23 +107,31 @@ function RandomTag(){
     return tag;
     
 }
+var pocetTahu = 0;
 
+var id1;
 var otoceniVPrubehu = false;
 var prvniBool = false;
 var tag1;
 var karta1;
-
+// chyba muzes kliknout dvakrat na stejnou karticku a ono to uzna !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function Otoc(componet){
-    if (otoceniVPrubehu == false) {
+    if (otoceniVPrubehu == false && id1 != componet.id) {
         const tagValue = componet.getAttribute('tag');
         componet.style.backgroundColor = pexesoVypln[tagValue]
 
         if (prvniBool==true){
             otoceniVPrubehu = true;
+            id1 = null; 
+        }
+        else{
+            id1= componet.id;
         }
         setTimeout(function() {
             if (prvniBool == true)
             {
+                pocetTahu++;
+                document.getElementById('score').innerHTML = `Score: ${pocetTahu}`;
                 otoceniVPrubehu = true;
                 if (tagValue == tag1)
                 {
@@ -147,5 +155,4 @@ function Otoc(componet){
             otoceniVPrubehu = false;
         }, 1500);
     }
-    
 }
