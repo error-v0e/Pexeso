@@ -83,7 +83,7 @@ function Size(){
 
             }
             else {
-                tr.innerHTML+= `<td onclick="Otoc(this)" id="${i}${j}" tag="${RandomTag()}">`
+                tr.innerHTML+= `<td onclick="Otoc(this)" id="${i}${j}" class="td" tag="${RandomTag()}">`
             }
             
 

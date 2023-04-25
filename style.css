@@ -12,14 +12,14 @@ form{
     left: 50%;
     transform: translate(-50%, 0);
 }
-table {
+#table {
     
     position: relative;
     width: fit-content;
     left: 50%;
     transform: translate(-50%, 0);
 }
-td {    
+.td {    
     width: 85px;
     height: 85px;   
     background-color: rgb(0, 0, 0);
@@ -35,7 +35,7 @@ td {
     transform: translate(-100%, 0);
 }
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50; 
     border: none;
     color: white;
     text-align: center;
@@ -54,4 +54,4 @@ td {
 .button:hover {
     background-color: #4CAF50;
     color: white;
-  }
+}
