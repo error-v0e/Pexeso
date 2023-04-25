@@ -110,41 +110,50 @@ function RandomTag(){
 var pocetTahu = 0;
 
 var id1;
-var otoceniVPrubehu = false;
 var prvniBool = false;
+var druhyBool = false;
 var tag1;
 var karta1;
 
 function Otoc(componet){
-    if (otoceniVPrubehu == false && id1 != componet.id) {
+    
+    if (druhyBool == true && prvniBool == true)  {
+
+    } 
+    else if(id1 != componet.id){
+        if(prvniBool==true){
+            druhyBool=true
+        }
         const tagValue = componet.getAttribute('tag');
         componet.style.backgroundColor = pexesoVypln[tagValue]
-
+    
         if (prvniBool==true){
-            otoceniVPrubehu = true;
-            id1 = null; 
+            id1 = "1111"; 
         }
         else{
             id1= componet.id;
         }
-        setTimeout(function() {
+        
             if (prvniBool == true)
             {
-                pocetTahu++;
-                document.getElementById('score').innerHTML = `Score: ${pocetTahu}`;
-                otoceniVPrubehu = true;
-                if (tagValue == tag1)
-                {
-                    componet.style.visibility = 'hidden';
-                    karta1.style.visibility = 'hidden';
-                    prvniBool = false;
-                }
-                else
-                {
-                    componet.style.backgroundColor = 'black';
-                    karta1.style.backgroundColor = 'black';
-                    prvniBool = false;
-                }
+                
+                setTimeout(function() {
+                    pocetTahu++;
+                    document.getElementById('score').innerHTML = `Score: ${pocetTahu}`;
+                    if (tagValue == tag1)
+                    {
+                        componet.style.visibility = 'hidden';
+                        karta1.style.visibility = 'hidden';
+                        prvniBool = false;
+                    }
+                    else
+                    {
+                        componet.style.backgroundColor = 'black';
+                        karta1.style.backgroundColor = 'black';
+                        prvniBool = false;
+                    }
+                    druhyBool=false;
+                }, 1500);
             }
             else
             {
@@ -152,7 +161,8 @@ function Otoc(componet){
                 prvniBool = true;
                 karta1= componet;
             }
-            otoceniVPrubehu = false;
-        }, 1500);
+        
+        
     }
+    
 }
