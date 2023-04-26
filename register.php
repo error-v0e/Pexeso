@@ -35,8 +35,9 @@
 
     $sql = "INSERT INTO users (jmeno, email, heslo) VALUES ('$username', '$email', '$hashed_password')";
     mysqli_query($connection, $sql);
-    }
 
+    header("Location: index.php");
+    }
 
     ?>
 
