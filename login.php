@@ -14,14 +14,35 @@
     </script>
 </head>
 <body class="background">
+<script>
+    
     <?php
     $connection = new mysqli("localhost", "root", "", "2itc");
-        if($connection->errno === TRUE){
-            echo $connection->error;
-            die();
-        }
+    if($connection->errno === TRUE){
+        echo $connection->error;
+        die();
+    }
+
+    if (isset($_POST["heslo"])) {
+        
+    $username = $_POST['jmeno'];
+    $email = $_POST['e-mail'];
+    $password = $_POST['heslo'];
+
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    $sql = "SELECT jmeno, email, heslo FROM users WHERE jmeno = '$username' AND heslo = '$password' AND email = '$email'";
+    mysqli_query($connection, $sql);
+    
+    header("Location: index.php");
+    }
+
     ?>
-<div class="white-square">
+
+</script>
+    
+<form action="login.php" method="post">
+    <div class="white-square">
         <div class="h1">
             Login
         </div>
@@ -30,21 +51,21 @@
         </div>
         <div class="jmeno">
             <label for="jmeno"></label>
-            <input type="text" id="jmeno" name="jmeno" placeholder="Enter your username">
+            <input type="text" id="jmeno" name="jmeno" placeholder="Enter your username" required>
         </div>
         <div class="email">
             E-mail
         </div>
         <div class="e-mail">
             <label for="jmeno"></label>
-            <input type="text" id="e-mail" name="e-mail" placeholder="Enter your e-mail">
+            <input type="email" id="e-mail" name="e-mail" placeholder="Enter your e-mail" required>
         </div>
         <div class="password">
             Password
         </div>
         <div class="heslo">
             <label for="heslo"></label>
-            <input type="password" id="heslo" name="heslo" placeholder="Enter your password" >
+            <input type="password" id="heslo" name="heslo" placeholder="Enter your password" required>
         </div>
         <div class="submit">
             <input id="submitedit" type="submit" value="Login">
@@ -53,5 +74,6 @@
             <a href="http://localhost/workspace/Pexeso/register.php">Register</a>
         </div>
     </div>
+</form>
 </body>
 </html>

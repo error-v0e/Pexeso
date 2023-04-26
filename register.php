@@ -16,20 +16,6 @@
 <body class="background">
 
 <script>
-    /*function validate(){
-        var jmeno = document.getElementById('jmeno').value;
-        var email = document.getElementById('e-mail').value;
-        var heslo = document.getElementById('heslo').value;
-        var confHeslo = document.getElementById('povrdHeslo').value;
-
-        if (jmeno.length > 0 && email.length > 0 && heslo.length > 0 && confHeslo.length > 0 && heslo == confHeslo){
-            alert("went through");
-            return true;
-        }
-        alert("did not go through");
-        return false;
-    }*/
-
     <?php
     $connection = new mysqli("localhost", "root", "", "2itc");
     if($connection->errno === TRUE){
@@ -37,23 +23,31 @@
         die();
     }
 
+    
+    if (isset($_POST["heslo"])) {
+        
     $username = $_POST['jmeno'];
     $email = $_POST['e-mail'];
     $password = $_POST['heslo'];
     $confPassword = $_POST['potvrdHeslo'];
 
-    if (empty($username) || empty($email) || empty($password) || empty($confPassword)) {
-        echo "nemas vsechno zadane";
-    }
-    else if ($password != $confPassword) {
-        echo "hesla se neshoduji";
-    }
-    else {
-        $sql = "INSERT INTO users (jmeno, email, heslo) VALUES ('$username', '$email', '$password')";
-        mysqli_query($connection, $sql);
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    $sql = "INSERT INTO users (jmeno, email, heslo) VALUES ('$username', '$email', '$hashed_password')";
+    mysqli_query($connection, $sql);
+
+    header("Location: index.php");
     }
 
     ?>
+
+    function checkPassword(input) {
+        if (input.value !== document.getElementById('heslo').value) {
+            input.setCustomValidity('Passwords must match.');
+        } else {
+            input.setCustomValidity('');
+        }   
+    }
 
 </script>
 
@@ -67,28 +61,28 @@
         </div>
         <div class="jmeno">
             <label for="jmeno"></label>
-            <input type="text" id="jmeno" name="jmeno" placeholder="Enter your username">
+            <input type="text" id="jmeno" name="jmeno" placeholder="Enter your username" required>
         </div>
         <div class="email">
             E-mail
         </div>
         <div class="e-mail">
             <label for="jmeno"></label>
-            <input type="text" id="e-mail" name="e-mail" placeholder="Enter your e-mail">
+            <input type="email" id="e-mail" name="e-mail" placeholder="Enter your e-mail" required>
         </div>
         <div class="password">
             Password
         </div>
         <div class="heslo">
             <label for="heslo"></label>
-            <input type="password" id="heslo" name="heslo" placeholder="Enter your password" >
+            <input type="password" id="heslo" name="heslo" placeholder="Enter your password" required>
         </div>
         <div class="confirmPassword">
             Confirm password
         </div>
         <div class="potvrdHeslo">
             <label for="potvrd heslo"></label>
-            <input type="password" id="potvrdHeslo" name="potvrdHeslo" placeholder="Confirm your password" >
+            <input type="password" id="potvrdHeslo" name="potvrdHeslo" placeholder="Confirm your password" required oninput="checkPassword(this)">>
         </div>
         <div class="submit">
             <input id="submitedit" type="submit" value="Register">
