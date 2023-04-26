@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,7 @@
         die();
     }
 
-    if (isset($_POST["heslo"])) {
+    if (isset($_POST["heslo"])) {}
         
     $username = $_POST['jmeno'];
     $email = $_POST['e-mail'];
@@ -31,10 +34,21 @@
 
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-    $sql = "SELECT jmeno, email, heslo FROM users WHERE jmeno = '$username' AND heslo = '$password' AND email = '$email'";
-    mysqli_query($connection, $sql);
+    $sql = "SELECT jmeno, email, heslo FROM users WHERE jmeno = '$username' AND email = '$email'";
+    $result = $connection->query($sql);
+
+        if($result->num_rows > 0){
+            //Uživatel se našel
+            $user = $result->fetch_object();
+            if(password_verify($password, $user->password)){
+                //Uživatel zadal správné heslo
+                echo "Uživatel je přihlášen";
+                $_SESSION["isLogged"] = true;
+                $_SESSION["username"] = $user->username;
+            }
     
     header("Location: index.php");
+
     }
 
     ?>

@@ -1,4 +1,9 @@
 var tags = [];
+var pocetDvojicCelkem;
+var pocetDvojicAktualne=0
+var kod;
+var heightp;
+var widthp;
 
 // vyuzil jsem na to barvy ale mohou tam byt fotky to je na vas treba api
 var pexesoVypln = [
@@ -63,6 +68,10 @@ function Size(){
     form.style.visibility = 'hidden';
     const table = document.getElementById('table');
 
+
+    heightp=height.value;
+    widthp=width.value;
+
     
 
     var sudy = true;
@@ -70,9 +79,11 @@ function Size(){
     if ((height.value*width.value)%2==1) {
         sudy = false;
         TagsCreate(height.value*width.value-1)
+        pocetDvojicCelkem = (height.value*width.value-1)/2;
     }
     else {
         TagsCreate(height.value*width.value);
+        pocetDvojicCelkem = (height.value*width.value)/2;
     }
 
     for (let i = 0; i < height.value; i++) {
@@ -89,6 +100,8 @@ function Size(){
 
         }
     }
+    kod = height.value*100;
+    kod += width.value;
 
 }
 function TagsCreate(count){
@@ -145,6 +158,21 @@ function Otoc(componet){
                         componet.style.visibility = 'hidden';
                         karta1.style.visibility = 'hidden';
                         prvniBool = false;
+                        pocetDvojicAktualne++;
+                        if (pocetDvojicAktualne>=pocetDvojicCelkem) {
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "leadeboard.php");
+                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            xhr.onreadystatechange = function() {
+                            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                                // Zpracování odpovědi z PHP
+                                console.log(this.responseText);
+                            }
+                            };
+                            var data = "score=" + encodeURIComponent(pocetTahu) + "&kod=" + encodeURIComponent(kod) + "&height=" + encodeURIComponent(heightp) + "&width=" + encodeURIComponent(widthp);
+                            xhr.send(data);
+                            window.location.replace("leadeboard.php");
+                        }
                     }
                     else
                     {
@@ -161,8 +189,9 @@ function Otoc(componet){
                 prvniBool = true;
                 karta1= componet;
             }
-        
-        
+            
     }
+
+    
     
 }

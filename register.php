@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +38,9 @@
 
     $sql = "INSERT INTO users (jmeno, email, heslo) VALUES ('$username', '$email', '$hashed_password')";
     mysqli_query($connection, $sql);
+
+    $_SESSION["isLogged"] = true;
+    $_SESSION["username"] = $username;
 
     header("Location: index.php");
     }
