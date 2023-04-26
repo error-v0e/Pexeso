@@ -14,7 +14,16 @@
             <th class="scoreTh">Jmeno</th>
             <th class="scoreTh">Score</th>
             <th class="scoreTh">
-                <!-- tadu bude dropdown-->
+                <form action="/action_page.php">
+                    <label for="cars">Choose a car:</label>
+                    <select id="cars" name="cars">
+                      <option value="volvo">4x4</option>
+                      <option value="saab">4x3</option>
+                      <option value="fiat">3x3</option>
+                      <option value="audi">5x5</option>
+                    </select>
+                    <input type="submit">
+                  </form>
             </th class="scoreTh">
         </tr>
         <tr class="scoreTr">
