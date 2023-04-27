@@ -100,7 +100,7 @@ function Size(){
 
         }
     }
-    kod = height.value*100;
+    kod = height.value*10;
     kod += width.value;
 
 }
@@ -160,18 +160,8 @@ function Otoc(componet){
                         prvniBool = false;
                         pocetDvojicAktualne++;
                         if (pocetDvojicAktualne>=pocetDvojicCelkem) {
-                            var xhr = new XMLHttpRequest();
-                            xhr.open("POST", "leadeboard.php");
-                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                            xhr.onreadystatechange = function() {
-                            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                                // Zpracování odpovědi z PHP
-                                console.log(this.responseText);
-                            }
-                            };
-                            var data = "score=" + encodeURIComponent(pocetTahu) + "&kod=" + encodeURIComponent(kod) + "&height=" + encodeURIComponent(heightp) + "&width=" + encodeURIComponent(widthp);
-                            xhr.send(data);
-                            window.location.replace("leadeboard.php");
+                            window.location.href = "leadeboard.php?score=" + pocetTahu + "&kod=" + kod + "&height=" + heightp + "&width=" + widthp;
+                            //Swindow.location.replace("leadeboard.php");
                         }
                     }
                     else
