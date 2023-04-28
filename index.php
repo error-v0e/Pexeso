@@ -14,18 +14,7 @@
 </head>
 
 <body class="background">
-    <?php
-    session_start();
-    if (!isset($_SESSION["user_id"])) {
-        header("HTTP/1.1 401 Unauthorized");
-        echo "You need to be logged in";
-        echo "<br>";
-        echo "<a href='http://localhost/workspace/Pexeso/register.php'>Register</a>";
-        echo "<br>";
-        echo "<a href='http://localhost/workspace/Pexeso/login.php'>Login</a>";
-        exit();
-    }
-    ?>
+    
     <a href="login.php">login</a>
     <a href="register.php">register</a>
     <form id="size" name="size" onsubmit="return Size();">

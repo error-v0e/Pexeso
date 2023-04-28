@@ -36,6 +36,8 @@ session_start();
         if (mysqli_num_rows($result) > 0) {
             $isLogged = true;
             $_SESSION["user_id"] = true;
+            $_SESSION["isLogged"] = true;
+            $_SESSION["username"] = $username;
             header("Location: index.php");
         } else {
             echo "<h1>failed to login</h1>";
