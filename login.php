@@ -18,37 +18,22 @@
 </head>
 <body class="background">
 <script>
-    
     <?php
     $connection = new mysqli("localhost", "root", "", "2itc");
     if($connection->errno === TRUE){
         echo $connection->error;
         die();
     }
-
-    if (isset($_POST["heslo"])) {}
+    if (isset($_POST["heslo"])) {
         
     $username = $_POST['jmeno'];
     $email = $_POST['e-mail'];
     $password = $_POST['heslo'];
-
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-    $sql = "SELECT jmeno, email, heslo FROM users WHERE jmeno = '$username' AND email = '$email'";
-    $result = $connection->query($sql);
-
-        if($result->num_rows > 0){
-            //Uživatel se našel
-            $user = $result->fetch_object();
-            if(password_verify($password, $user->password)){
-                //Uživatel zadal správné heslo
-                echo "Uživatel je přihlášen";
-                $_SESSION["isLogged"] = true;
-                $_SESSION["username"] = $user->username;
-            }
+    $sql = "SELECT jmeno, email, heslo FROM users WHERE jmeno = '$username' AND heslo = '$password' AND email = '$email'";
+    mysqli_query($connection, $sql);
     
     header("Location: index.php");
-
     }
 
     ?>
