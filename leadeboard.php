@@ -8,7 +8,11 @@ else{
     $isLogged = false;
 }
 
-    $username= $_SESSION["username"];
+    $username;
+    if(isset($_SESSION["username"])){
+        $username= $_SESSION["username"];
+    }
+
     $bool=true;
     
     if (isset($_GET['score'])) {
@@ -45,13 +49,13 @@ else{
             $idGame=0;
             $scoreB=10000000000;
 
-            $connection = new mysqli("localhost", "root", "", "2itc");
-            $sql = "SELECT id FROM users WHERE jmeno = '$username' ";
-            $result = $connection->query($sql);
-            while($row = $result->fetch_assoc()) {
-                $idUser = $row['id'];
-            }
             if($isLogged){
+                $connection = new mysqli("localhost", "root", "", "2itc");
+                $sql = "SELECT id FROM users WHERE jmeno = '$username' ";
+                $result = $connection->query($sql);
+                while($row = $result->fetch_assoc()) {
+                    $idUser = $row['id'];
+                }
                 
                 $sql = "SELECT score, id FROM games WHERE fk_user = '$idUser' AND kod = '$kod';";
                 $result = $connection->query($sql);
