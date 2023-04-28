@@ -29,6 +29,7 @@
     $username = $_POST['jmeno'];
     $email = $_POST['e-mail'];
     $password = $_POST['heslo'];
+    $isLogged = true;
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     $sql = "SELECT jmeno, email, heslo FROM users WHERE jmeno = '$username' AND heslo = '$password' AND email = '$email'";
     mysqli_query($connection, $sql);
