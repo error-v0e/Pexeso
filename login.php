@@ -25,17 +25,17 @@
         echo $connection->error;
         die();
     }
-    if (isset($_POST["heslo"])) {
-        
-    $username = $_POST['jmeno'];
-    $email = $_POST['e-mail'];
-    $password = $_POST['heslo'];
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-    $sql = "SELECT jmeno, email, heslo FROM users WHERE jmeno = '$username' AND heslo = '$password' AND email = '$email'";
-    mysqli_query($connection, $sql);
-    $isLogged = true;
-    
-    header("Location: index.php");
+    if (isset($_POST["heslo"])) {   
+        $sql = "SELECT jmeno, email, heslo FROM users WHERE jmeno = '$username' AND heslo = '$hashed_password' AND email = '$email'";
+        $result = mysqli_query($connection, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+            $check_username = $row['username'];
+            $check_password = $row['password'];
+        }
+        if($username == $check_username && $password == $check_password){
+            header("Location: index.php");
+            $isLogged = true;
+        }
     }
 
     ?>
