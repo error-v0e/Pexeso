@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pexeso</title>
-    
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <script
-    src="https://code.jquery.com/jquery-3.6.3.min.js"
-    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-    crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous">
     </script>
 </head>
+
 <body class="background">
+    <?php
+    session_start();
+    if (!isset($_SESSION["user_id"])) {
+        header("HTTP/1.1 401 Unauthorized");
+        echo "You need to be logged in";
+        echo "<br>";
+        echo "<a href='http://localhost/workspace/Pexeso/register.php'>Register</a>";
+        echo "<br>";
+        echo "<a href='http://localhost/workspace/Pexeso/login.php'>Login</a>";
+        exit();
+    }
+    ?>
     <a href="login.php">login</a>
     <a href="register.php">register</a>
     <form id="size" name="size" onsubmit="return Size();">
@@ -26,8 +37,7 @@
     </form>
     <div id="score">Tries: 0</div>
     <table id="table"></table>
-
-
     <script src="script.js"></script>
 </body>
+
 </html>

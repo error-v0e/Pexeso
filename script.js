@@ -1,6 +1,6 @@
 var tags = [];
 var pocetDvojicCelkem;
-var pocetDvojicAktualne=0
+var pocetDvojicAktualne = 0
 var kod;
 var heightp;
 var widthp;
@@ -59,7 +59,7 @@ var pexesoVypln = [
     '#0c1519',
 ]
 
-function Size(){
+function Size() {
     event.preventDefault();
     const height = document.forms['size']['height'];
     const width = document.forms['size']['width'];
@@ -69,56 +69,56 @@ function Size(){
     const table = document.getElementById('table');
 
 
-    heightp=height.value;
-    widthp=width.value;
+    heightp = height.value;
+    widthp = width.value;
 
-    
+
 
     var sudy = true;
 
-    if ((height.value*width.value)%2==1) {
+    if ((height.value * width.value) % 2 == 1) {
         sudy = false;
-        TagsCreate(height.value*width.value-1)
-        pocetDvojicCelkem = (height.value*width.value-1)/2;
+        TagsCreate(height.value * width.value - 1)
+        pocetDvojicCelkem = (height.value * width.value - 1) / 2;
     }
     else {
-        TagsCreate(height.value*width.value);
-        pocetDvojicCelkem = (height.value*width.value)/2;
+        TagsCreate(height.value * width.value);
+        pocetDvojicCelkem = (height.value * width.value) / 2;
     }
 
     for (let i = 0; i < height.value; i++) {
         const tr = document.createElement('tr');
         table.appendChild(tr);
         for (let j = 0; j < width.value; j++) {
-            if  (!sudy && i==height.value-1 && j==width.value-1) {
+            if (!sudy && i == height.value - 1 && j == width.value - 1) {
 
             }
             else {
-                tr.innerHTML+= `<td onclick="Otoc(this)" id="${i}${j}" class="td" tag="${RandomTag()}">`
+                tr.innerHTML += `<td onclick="Otoc(this)" id="${i}${j}" class="td" tag="${RandomTag()}">`
             }
-            
+
 
         }
     }
-    kod = height.value*10;
+    kod = height.value * 10;
     kod += width.value;
 
 }
-function TagsCreate(count){
+function TagsCreate(count) {
     var tags2 = [];
-    for (let i = 0; i < count/2; i++) {
+    for (let i = 0; i < count / 2; i++) {
         tags2.push(i);
         tags2.push(i);
     }
-    tags=tags2;
+    tags = tags2;
 }
 
-function RandomTag(){
-    var index = Math.floor(Math.random()*tags.length);
+function RandomTag() {
+    var index = Math.floor(Math.random() * tags.length);
     var tag = tags[index];
-    tags.splice(index,1);
+    tags.splice(index, 1);
     return tag;
-    
+
 }
 var pocetTahu = 0;
 
@@ -128,60 +128,56 @@ var druhyBool = false;
 var tag1;
 var karta1;
 
-function Otoc(componet){
-    
-    if (druhyBool == true && prvniBool == true)  {
+function Otoc(componet) {
 
-    } 
-    else if(id1 != componet.id){
-        if(prvniBool==true){
-            druhyBool=true
+    if (druhyBool == true && prvniBool == true) {
+
+    }
+    else if (id1 != componet.id) {
+        if (prvniBool == true) {
+            druhyBool = true
         }
         const tagValue = componet.getAttribute('tag');
         componet.style.backgroundColor = pexesoVypln[tagValue]
-    
-        if (prvniBool==true){
-            id1 = "1111"; 
+
+        if (prvniBool == true) {
+            id1 = "1111";
         }
-        else{
-            id1= componet.id;
+        else {
+            id1 = componet.id;
         }
-        
-            if (prvniBool == true)
-            {
-                
-                setTimeout(function() {
-                    pocetTahu++;
-                    document.getElementById('score').innerHTML = `Score: ${pocetTahu}`;
-                    if (tagValue == tag1)
-                    {
-                        componet.style.visibility = 'hidden';
-                        karta1.style.visibility = 'hidden';
-                        prvniBool = false;
-                        pocetDvojicAktualne++;
-                        if (pocetDvojicAktualne>=pocetDvojicCelkem) {
-                            window.location.href = "leadeboard.php?score=" + pocetTahu + "&kod=" + kod + "&height=" + heightp + "&width=" + widthp;
-                            //Swindow.location.replace("leadeboard.php");
-                        }
+
+        if (prvniBool == true) {
+
+            setTimeout(function () {
+                pocetTahu++;
+                document.getElementById('score').innerHTML = `Score: ${pocetTahu}`;
+                if (tagValue == tag1) {
+                    componet.style.visibility = 'hidden';
+                    karta1.style.visibility = 'hidden';
+                    prvniBool = false;
+                    pocetDvojicAktualne++;
+                    if (pocetDvojicAktualne >= pocetDvojicCelkem) {
+                        window.location.href = "leadeboard.php?score=" + pocetTahu + "&kod=" + kod + "&height=" + heightp + "&width=" + widthp;
+                        //Swindow.location.replace("leadeboard.php");
                     }
-                    else
-                    {
-                        componet.style.backgroundColor = 'black';
-                        karta1.style.backgroundColor = 'black';
-                        prvniBool = false;
-                    }
-                    druhyBool=false;
-                }, 1500);
-            }
-            else
-            {
-                tag1 = tagValue;
-                prvniBool = true;
-                karta1= componet;
-            }
-            
+                }
+                else {
+                    componet.style.backgroundColor = 'black';
+                    karta1.style.backgroundColor = 'black';
+                    prvniBool = false;
+                }
+                druhyBool = false;
+            }, 1500);
+        }
+        else {
+            tag1 = tagValue;
+            prvniBool = true;
+            karta1 = componet;
+        }
+
     }
 
-    
-    
+
+
 }
