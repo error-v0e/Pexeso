@@ -14,14 +14,14 @@
     crossorigin="anonymous">
     </script>
 </head>
-<body>
+<body class="background">
     <a href="login.php">login</a>
     <a href="register.php">register</a>
     <form id="size" name="size" onsubmit="return Size();">
-        <label for="height">height</label>
-        <input type="number" name="height" min="3" max="10" placeholder="3-10">
-        <label for="width">wight</label>
-        <input type="number" name="width" min="3" max="10" placeholder="3-10">
+        <label for="height" class="text">Height</label>
+        <input type="number" class="pole" name="height" min="3" max="10" placeholder="3-10">
+        <label for="width" class="text">Width</label>
+        <input type="number" class="pole" name="width" min="3" max="10" placeholder="3-10"><br>
         <input class="button" type="submit" value="Start">
     </form>
     <div id="score">Tries: 0</div>

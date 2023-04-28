@@ -22,7 +22,9 @@ table {
 .td {    
     width: 85px;
     height: 85px;   
-    background-color: rgb(0, 0, 0);
+    background-color: black;
+    box-shadow: 3px 3px 3px rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
 }
 #score {
     
@@ -34,8 +36,10 @@ table {
     right: 50px;
     transform: translate(-100%, 0);
 }
-.button {
-    background-color: #4CAF50; 
+.button{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 40px;
+    width: 100px;
     border: none;
     color: white;
     text-align: center;
@@ -47,13 +51,18 @@ table {
     cursor: pointer;
     background-color: white; 
     color: black; 
-    border: 2px solid #4CAF50;
-    border-radius: 4px;
-  }
+    border: 2px solid #065809;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+    margin-left: 40%;
+}
   
 .button:hover {
-    background-color: #4CAF50;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
+    background-image: url(https://www.teahub.io/photos/full/255-2550281_wallpaper-gradient-green-yellow-linear-dark-cyan-color.jpg);
+    background-position: center;
+    background-size: 100%;
 }
 
 .scoreTable {
@@ -67,3 +76,27 @@ table {
   }
   
   .scoreTr:hover {background-color: #D6EEEE;}
+
+
+.background{
+    background-image: url(https://www.teahub.io/photos/full/255-2550281_wallpaper-gradient-green-yellow-linear-dark-cyan-color.jpg);
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+.pole{
+    border-radius: 10px;
+    border-color: #065809;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+    width: 100px;
+    height: 40px;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.text{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+}
+#score{
+    color: white;
+}
