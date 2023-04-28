@@ -36,7 +36,7 @@ else{
     }
 
 
-    if($isLogged){
+    
         if($bool){
             $_SESSION["kcod"] = $kod;
             $_SESSION["score"] = $score;
@@ -51,22 +51,24 @@ else{
             while($row = $result->fetch_assoc()) {
                 $idUser = $row['id'];
             }
+            if($isLogged){
                 
-            $sql = "SELECT score, id FROM games WHERE fk_user = '$idUser' AND kod = '$kod';";
-            $result = $connection->query($sql);
-            while($row = $result->fetch_assoc()) {
-                $scoreB = $row['score'];
-                $idGame = $row['id'];
-            }
+                $sql = "SELECT score, id FROM games WHERE fk_user = '$idUser' AND kod = '$kod';";
+                $result = $connection->query($sql);
+                while($row = $result->fetch_assoc()) {
+                    $scoreB = $row['score'];
+                    $idGame = $row['id'];
+                }
 
-            if($scoreB > $score){
-                $sql = "INSERT INTO  games (score, height, width, kod, fk_user) VALUES ('$score', '$height', '$width', '$kod', '$idUser')";
-                mysqli_query($connection, $sql);
-                $sql = "DELETE FROM games WHERE id = '$idGame';";
-                mysqli_query($connection, $sql);
+                if($scoreB > $score){
+                    $sql = "INSERT INTO  games (score, height, width, kod, fk_user) VALUES ('$score', '$height', '$width', '$kod', '$idUser')";
+                    mysqli_query($connection, $sql);
+                    $sql = "DELETE FROM games WHERE id = '$idGame';";
+                    mysqli_query($connection, $sql);
+                }
             }
         }
-    }
+    
 
 ?>
 
