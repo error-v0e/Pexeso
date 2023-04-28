@@ -7,7 +7,7 @@ if(isset($_SESSION["isLogged"])){
 else{
     $isLogged = false;
 }
-if($isLogged){
+
     $username= $_SESSION["username"];
     $bool=true;
     
@@ -35,47 +35,38 @@ if($isLogged){
         $bool=false;
     }
 
-    if($bool){
-        $_SESSION["kcod"] = $kod;
-        $_SESSION["score"] = $score;
 
-        $idUser;
-        $idGame=0;
-        $scoreB=10000000000;
+    if($isLogged){
+        if($bool){
+            $_SESSION["kcod"] = $kod;
+            $_SESSION["score"] = $score;
 
-        $connection = new mysqli("localhost", "root", "", "2itc");
-        $sql = "SELECT id FROM users WHERE jmeno = '$username' ";
-        $result = $connection->query($sql);
-        while($row = $result->fetch_assoc()) {
-            $idUser = $row['id'];
-        }
-            
-        $sql = "SELECT score, id FROM games WHERE fk_user = '$idUser' AND kod = '$kod';";
-        $result = $connection->query($sql);
-        while($row = $result->fetch_assoc()) {
-            $scoreB = $row['score'];
-            $idGame = $row['id'];
-        }
+            $idUser;
+            $idGame=0;
+            $scoreB=10000000000;
 
-        if($scoreB > $score){
-            $sql = "INSERT INTO  games (score, height, width, kod, fk_user) VALUES ('$score', '$height', '$width', '$kod', '$idUser')";
-            mysqli_query($connection, $sql);
-            $sql = "DELETE FROM games WHERE id = '$idGame';";
-            mysqli_query($connection, $sql);
+            $connection = new mysqli("localhost", "root", "", "2itc");
+            $sql = "SELECT id FROM users WHERE jmeno = '$username' ";
+            $result = $connection->query($sql);
+            while($row = $result->fetch_assoc()) {
+                $idUser = $row['id'];
+            }
+                
+            $sql = "SELECT score, id FROM games WHERE fk_user = '$idUser' AND kod = '$kod';";
+            $result = $connection->query($sql);
+            while($row = $result->fetch_assoc()) {
+                $scoreB = $row['score'];
+                $idGame = $row['id'];
+            }
+
+            if($scoreB > $score){
+                $sql = "INSERT INTO  games (score, height, width, kod, fk_user) VALUES ('$score', '$height', '$width', '$kod', '$idUser')";
+                mysqli_query($connection, $sql);
+                $sql = "DELETE FROM games WHERE id = '$idGame';";
+                mysqli_query($connection, $sql);
+            }
         }
     }
-
-
-    
-    
-    
-
-
-}
-else{
-    header("location:index.php");
-    die();
-}
 
 ?>
 
